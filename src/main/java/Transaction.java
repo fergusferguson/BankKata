@@ -17,5 +17,4 @@ public class Transaction {
     public int getTransactionAmount() {
         return transactionAmount;
     }
-
 }

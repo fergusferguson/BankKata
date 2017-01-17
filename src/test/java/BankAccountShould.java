@@ -30,7 +30,7 @@ public class BankAccountShould {
 
     @Test
     public void print_only_headers_when_no_transactions() {
-        BankAccount bankAccount = new BankAccount(0);
+        BankAccount bankAccount = new BankAccount();
 
         bankAccount.printStatement();
 
@@ -39,7 +39,7 @@ public class BankAccountShould {
 
     @Test
     public void increment_balance_by_10_when_deposit_10() {
-        BankAccount bankAccount = new BankAccount(0);
+        BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(10);
 
         bankAccount.printStatement();
@@ -60,7 +60,7 @@ public class BankAccountShould {
     @Test
     public void throw_exception_when_deposit_is_zero_or_less() {
 
-        BankAccount bankAccount = new BankAccount(0);
+        BankAccount bankAccount = new BankAccount();
 
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("You must deposit a positive value!");
@@ -80,7 +80,7 @@ public class BankAccountShould {
 
     @Test
     public void print_multiple_deposit_transactions_on_separate_lines() {
-        BankAccount bankAccount = new BankAccount(0);
+        BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(20);
         bankAccount.deposit(30);
 
@@ -92,7 +92,7 @@ public class BankAccountShould {
     @Test
     public void print_mix_of_deposit_and_withdrawal_transactions_on_separate_lines() {
 
-        BankAccount bankAccount = new BankAccount(0);
+        BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(20);
         bankAccount.withdraw(10);
 

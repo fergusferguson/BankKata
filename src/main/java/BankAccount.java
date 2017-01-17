@@ -2,23 +2,23 @@ import java.util.ArrayList;
 
 public class BankAccount {
 
-    public int balance;
+    public int startingBalance;
 
     public ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
 
+    public BankAccount() { this.startingBalance = 0; }
 
     public BankAccount(int startingBalance) {
-        balance = startingBalance;
+        this.startingBalance = startingBalance;
     }
 
     public void printStatement() {
 
-        int runningBalance = balance;
+        int runningBalance = startingBalance;
 
         System.out.println("DATE|AMOUNT|BALANCE");
-        for(int i = 0; i< accountTransactions.size();i++){
-            Transaction trans = accountTransactions.get(i);
-            runningBalance +=  trans.getTransactionAmount();
+        for (Transaction trans : accountTransactions) {
+            runningBalance += trans.getTransactionAmount();
             System.out.println(trans.getTransactionDate() + "|" + trans.getTransactionAmount() + "|" + runningBalance);
         }
     }
@@ -37,7 +37,7 @@ public class BankAccount {
 
     public void withdraw(int withdrawAmount) {
 
-        if(isNotPositive(withdrawAmount)){
+        if (isNotPositive(withdrawAmount)) {
             throw new IllegalArgumentException("You must withdraw a positive value!");
         }
         withdrawAmount = withdrawAmount * -1;
