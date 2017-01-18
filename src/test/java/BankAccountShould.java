@@ -40,7 +40,7 @@ public class BankAccountShould {
     @Test
     public void increment_balance_by_10_when_deposit_10() {
         BankAccount bankAccount = new BankAccount();
-        bankAccount.deposit(10);
+        bankAccount.deposit("17/01/2017", 10);
 
         bankAccount.printStatement();
 
@@ -50,7 +50,7 @@ public class BankAccountShould {
     @Test
     public void reduce_balance_by_10_when_withdraw_10() {
         BankAccount bankAccount = new BankAccount(10);
-        bankAccount.withdraw(10);
+        bankAccount.withdraw("17/01/2017", 10);
 
         bankAccount.printStatement();
 
@@ -65,24 +65,24 @@ public class BankAccountShould {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("You must deposit a positive value!");
 
-        bankAccount.deposit(-10);
+        bankAccount.deposit("17/01/2017", -10);
     }
 
     @Test
-    public void throw_exception_when_withdrawal_is_zero_or_less(){
+    public void throw_exception_when_withdrawal_is_zero_or_less() {
         BankAccount bankAccount = new BankAccount(10);
 
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("You must withdraw a positive value!");
 
-        bankAccount.withdraw(-10);
+        bankAccount.withdraw("17/01/2017", -10);
     }
 
     @Test
     public void print_multiple_deposit_transactions_on_separate_lines() {
         BankAccount bankAccount = new BankAccount();
-        bankAccount.deposit(20);
-        bankAccount.deposit(30);
+        bankAccount.deposit("17/01/2017", 20);
+        bankAccount.deposit("17/01/2017", 30);
 
         bankAccount.printStatement();
 
@@ -93,8 +93,8 @@ public class BankAccountShould {
     public void print_mix_of_deposit_and_withdrawal_transactions_on_separate_lines() {
 
         BankAccount bankAccount = new BankAccount();
-        bankAccount.deposit(20);
-        bankAccount.withdraw(10);
+        bankAccount.deposit("17/01/2017", 20);
+        bankAccount.withdraw("17/01/2017", 10);
 
         bankAccount.printStatement();
 

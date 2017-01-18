@@ -1,4 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BankAccount {
 
@@ -6,7 +9,9 @@ public class BankAccount {
 
     public ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
 
-    public BankAccount() { this.startingBalance = 0; }
+    public BankAccount() {
+        this.startingBalance = 0;
+    }
 
     public BankAccount(int startingBalance) {
         this.startingBalance = startingBalance;
@@ -23,26 +28,40 @@ public class BankAccount {
         }
     }
 
-    public void deposit(int depositAmount) {
-        if (isNotPositive(depositAmount)) {
+    public void deposit(String depositDate, int depositAmount) {
+        if (!isPositive(depositAmount)) {
             throw new IllegalArgumentException("You must deposit a positive value!");
         }
-        Transaction transaction = new Transaction("17/01/2017", depositAmount);
+        Transaction transaction = new Transaction(depositDate, depositAmount);
         accountTransactions.add(transaction);
     }
 
-    private boolean isNotPositive(int amount) {
-        return amount <= 0;
+    private boolean isPositive(int amount) {
+        return amount > 0;
     }
 
-    public void withdraw(int withdrawAmount) {
+    public void withdraw(String withdrawalDate, int withdrawAmount) {
 
-        if (isNotPositive(withdrawAmount)) {
+        if (!isPositive(withdrawAmount)) {
             throw new IllegalArgumentException("You must withdraw a positive value!");
         }
         withdrawAmount = withdrawAmount * -1;
-        Transaction transaction = new Transaction("17/01/2017", withdrawAmount);
+        Transaction transaction = new Transaction(withdrawalDate, withdrawAmount);
         accountTransactions.add(transaction);
     }
+
+    public Date convertToDate(String stringDate) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateWithdrawalDate = null;
+
+        try {
+            dateWithdrawalDate = formatter.parse(stringDate);
+        } catch (ParseException exception) {
+            exception.printStackTrace();
+        }
+        return dateWithdrawalDate;
+    }
+
 
 }
